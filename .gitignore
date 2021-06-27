@@ -1,0 +1,3 @@
+visualizer
+src/*.o
+src/SFML/
