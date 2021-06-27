@@ -1,5 +1,7 @@
 # Sorting algorighms visualizer 
 
+![img example](https://github.com/vitaliiPsl/visualizer/blob/main/img/example.png)
+
 Available algorithms:
 - [x] Insertion sort
 - [x] Buble sort
