@@ -113,20 +113,23 @@ void Draw::draw_menu(){
     }
 
     std::vector<sf::Text> text(6);
+
+    text[0].setString("Press key:");
+    text[1].setString("[B] - Buble sort");
+    text[2].setString("[I] - Insertion sort");
+    text[3].setString("[M] - Merge sort");
+    text[4].setString("[S] - Shuffle");
+    text[5].setString("[Esc] - Exit");
+
     for(int i = 0; i < text.size(); i++){
         text[i].setFont(f_roboto);
         text[i].setCharacterSize(m_win.getSize().y / 4 / text.size());
         text[i].setFillColor(sf::Color::White);
-       
+        text[i].setLineSpacing(20);
         text[i].setPosition(m_win.getSize().x / 2.5, m_win.getSize().y / 3 + i * text[i].getCharacterSize());
     }
     
-    text[0].setString("Press key:");
-    text[1].setString("Buble sort - b");
-    text[2].setString("Insertion sort - i");
-    text[3].setString("Merge sort - m");
-    text[4].setString("Shuffle - s");
-    text[5].setString("Exit - esc");
+    
     
     
     for(auto el:text)
