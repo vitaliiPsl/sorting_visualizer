@@ -36,12 +36,43 @@ void Draw::draw_data(std::vector<float>& data){
 }
 
 void Draw::draw_sort(std::vector<float>& data, int i, int j){
-m_win.clear(sf::Color::Black);
+    m_win.clear(sf::Color::Black);
     events();
 
     auto bars = build_bars(data);
-    bars[i].setFillColor(sf::Color::Red);
-    bars[j].setFillColor(sf::Color::Green);
+    bars[i].setFillColor(sf::Color::Green);
+    bars[j].setFillColor(sf::Color::Red);
+
+    for(auto el:bars)
+        m_win.draw(el);
+    
+    m_win.display();
+    sf::sleep(sf::milliseconds(1));
+}
+
+void Draw::draw_sorted(std::vector<float>& data){
+    m_win.clear(sf::Color::Black);
+    events();
+
+    auto bars = build_bars(data);
+    draw_data(data);
+    for(auto el:bars){
+        el.setFillColor(sf::Color::Green);
+        m_win.draw(el);
+        m_win.display();
+        sf::sleep(sf::milliseconds(3));
+    }
+    m_win.display();
+}
+
+void Draw::draw_shuffle(std::vector<float>& data, int i, int j){
+    m_win.clear(sf::Color::Black);
+    events();
+
+
+    auto bars = build_bars(data);
+    bars[i].setFillColor(sf::Color::Green);
+    bars[j].setFillColor(sf::Color::Red);
 
     for(auto el:bars)
         m_win.draw(el);
@@ -51,7 +82,7 @@ m_win.clear(sf::Color::Black);
 }
 
 void Draw::draw_menu(){
-m_win.clear(sf::Color(0, 0, 0, 1));
+    m_win.clear(sf::Color::Black);
     events();
 
     sf::Font f_roboto;
@@ -102,7 +133,6 @@ m_win.clear(sf::Color(0, 0, 0, 1));
         m_win.draw(el);
             
     m_win.display();
-    std::cout << "Displayed" << std::endl;
 }
 
 void Draw::events(){
