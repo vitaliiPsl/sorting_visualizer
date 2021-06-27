@@ -3,7 +3,7 @@
 Visualizer::Visualizer(size_t width, size_t height) : m_window(sf::VideoMode(width, height),
 "Visualizer", sf::Style::Close | sf::Style::Titlebar), m_draw(m_window){
 
-    m_data.resize(m_window.getSize().x * 0.2);
+    m_data.resize(m_window.getSize().x / 10);
     float step = static_cast<float>(m_window.getSize().y) * 0.7 / m_data.size();
     float tmp = 0;
     for(int i{}; i < m_data.size(); i++){
@@ -27,12 +27,15 @@ void Visualizer::menu(){
         m_draw.events();
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::I)){
             m_sort = std::make_unique<Insertion>();
+            break;
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::B)){
             m_sort = std::make_unique<Buble>();
+            break;
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M)){
             m_sort = std::make_unique<Merge>();
+            break;
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)){
             shuffle(1);
@@ -47,16 +50,20 @@ void Visualizer::menu(){
     sort();
 }
 void Visualizer::sort(){
-    m_sort->sort(m_data);
+    m_sort->sort(m_data, m_draw);
 }
 
 void Visualizer::shuffle(bool draw){
+    srand(time(0));
     m_draw.draw_data(m_data);
+    sf::sleep(sf::seconds(1));
     for(int i{}; i < 5; i++){
         for(int j{}; j < m_data.size(); j++){
             int k = rand() % m_data.size();
-            if(draw)
-                m_draw.draw_sort(m_data, j , k);
+            if(draw){
+                m_draw.draw_shuffle(m_data, j, k);
+                sf::sleep(sf::milliseconds(15));
+            }
             std::swap(m_data[j], m_data[k]);
         }
     }
