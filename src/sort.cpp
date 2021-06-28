@@ -33,6 +33,25 @@ void Buble::sort(std::vector<float>& data, Draw& draw){
     sf::sleep(sf::seconds(1));
 }
 
+void Selection::sort(std::vector<float>& data, Draw& draw){
+    for(int i{0}; i < data.size(); i++){
+        int min = i; 
+        for(int j = i; j < data.size(); j++){
+            draw.draw_sort(data, i, min, j);
+            sf::sleep(sf::milliseconds(5));
+            if(data[j] < data[min]){
+                min = j;
+            }
+        }
+        draw.draw_sort(data, i, min);
+        sf::sleep(sf::milliseconds(5));
+        std::swap(data[i], data[min]);
+    }
+    draw.draw_sorted(data);
+    sf::sleep(sf::seconds(1));
+}
+
+
 void Merge::sort(std::vector<float>& data, Draw& draw){
     merge_sort(data, 0, data.size() - 1, draw);
     draw.draw_sorted(data);
@@ -43,8 +62,15 @@ void Merge::merge_sort(std::vector<float>& data, int left, int right, Draw& draw
     if(left >= right)
         return;
     int mid = left + (right - left) / 2;
+
+    draw.draw_sort(data, left, right, mid);
+    sf::sleep(sf::milliseconds(20));
     merge_sort(data, left, mid, draw);
+    
+    draw.draw_sort(data, left, right, mid);
+    sf::sleep(sf::milliseconds(20));
     merge_sort(data, mid + 1, right, draw);
+    
     merge(data, left, mid, right, draw);
 }
 
@@ -65,26 +91,26 @@ void Merge::merge(std::vector<float>& data, int left, int mid, int right, Draw& 
 
     while(i < s_left && j < s_right){
         if(v_left[i] < v_right[j]){
-            draw.draw_sort(data, i, k);
-            sf::sleep(sf::milliseconds(10));
+            draw.draw_sort(data, i, k, mid);
+            sf::sleep(sf::milliseconds(15));
             data[k++] = v_left[i++];
         }
         else{
-            draw.draw_sort(data, i, j);
-            sf::sleep(sf::milliseconds(10));
+            draw.draw_sort(data, i, j, mid);
+            sf::sleep(sf::milliseconds(15));
             data[k++] = v_right[j++];
         }
     }   
     
     while(i < s_left){
-        draw.draw_sort(data, i, k);
-        sf::sleep(sf::milliseconds(10));
+        draw.draw_sort(data, i, k, mid);
+        sf::sleep(sf::milliseconds(15));
         data[k++] = v_left[i++];
     }
 
     while(j < s_right){
-        draw.draw_sort(data, i, j);
-        sf::sleep(sf::milliseconds(10));
+        draw.draw_sort(data, i, j, mid);
+        sf::sleep(sf::milliseconds(15));
         data[k++] = v_right[j++];
     }
 }

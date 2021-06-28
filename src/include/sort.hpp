@@ -19,6 +19,11 @@ public:
     void sort(std::vector<float>& data, Draw& draw) override;
 };
 
+class Selection final : public Sort{
+public:
+    void sort(std::vector<float>& data, Draw& draw) override;
+};
+
 class Merge final : public Sort{
 public:
     void sort(std::vector<float>& data, Draw& draw) override;
