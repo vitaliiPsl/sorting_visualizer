@@ -33,11 +33,15 @@ void Visualizer::menu(){
             m_sort = std::make_unique<Buble>();
             break;
         }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)){
+            m_sort = std::make_unique<Selection>();
+            break;
+        }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M)){
             m_sort = std::make_unique<Merge>();
             break;
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)){
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)){
             shuffle(1);
             return;
         }
