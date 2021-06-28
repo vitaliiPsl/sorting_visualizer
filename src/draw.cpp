@@ -50,6 +50,22 @@ void Draw::draw_sort(std::vector<float>& data, int i, int j){
     sf::sleep(sf::milliseconds(1));
 }
 
+void Draw::draw_sort(std::vector<float>& data, int i, int j, int k){
+    m_win.clear(sf::Color::Black);
+    events();
+
+    auto bars = build_bars(data);
+    bars[i].setFillColor(sf::Color::Green);
+    bars[j].setFillColor(sf::Color::Red);
+    bars[k].setFillColor(sf::Color::Blue);
+
+    for(auto el:bars)
+        m_win.draw(el);
+    
+    m_win.display();
+    sf::sleep(sf::milliseconds(1));
+}
+
 void Draw::draw_sorted(std::vector<float>& data){
     m_win.clear(sf::Color::Black);
     events();
@@ -64,6 +80,7 @@ void Draw::draw_sorted(std::vector<float>& data){
     }
     m_win.display();
 }
+
 
 void Draw::draw_shuffle(std::vector<float>& data, int i, int j){
     m_win.clear(sf::Color::Black);
@@ -112,14 +129,15 @@ void Draw::draw_menu(){
         exit(1);
     }
 
-    std::vector<sf::Text> text(6);
+    std::vector<sf::Text> text(7);
 
     text[0].setString("Press key:");
     text[1].setString("[B] - Buble sort");
     text[2].setString("[I] - Insertion sort");
     text[3].setString("[M] - Merge sort");
-    text[4].setString("[S] - Shuffle");
-    text[5].setString("[Esc] - Exit");
+    text[4].setString("[S] - Selection sort");
+    text[5].setString("[Space] - Shuffle");
+    text[6].setString("[Esc] - Exit");
 
     for(int i = 0; i < text.size(); i++){
         text[i].setFont(f_roboto);

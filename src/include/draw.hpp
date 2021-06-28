@@ -15,6 +15,8 @@ public:
 
     void draw_sort(std::vector<float>& data, int i, int j);
 
+    void draw_sort(std::vector<float>& data, int i, int j, int k);
+
     void draw_shuffle(std::vector<float>& data, int i, int j);
 
     void draw_sorted(std::vector<float>& data);
