@@ -23,7 +23,7 @@ void Buble::sort(std::vector<float>& data, Draw& draw){
     for(int i{0}; i < data.size(); i++){
         for(int j{i}; j < data.size(); j++){
             draw.draw_sort(data, i, j);
-            sf::sleep(sf::milliseconds(5));
+            sf::sleep(sf::milliseconds(2));
             if(data[j] < data[i]){
                 std::swap(data[j], data[i]);
             }
@@ -36,15 +36,14 @@ void Buble::sort(std::vector<float>& data, Draw& draw){
 void Selection::sort(std::vector<float>& data, Draw& draw){
     for(int i{0}; i < data.size(); i++){
         int min = i; 
+        
         for(int j = i; j < data.size(); j++){
             draw.draw_sort(data, i, min, j);
-            sf::sleep(sf::milliseconds(5));
+            sf::sleep(sf::milliseconds(2));
             if(data[j] < data[min]){
                 min = j;
             }
         }
-        draw.draw_sort(data, i, min);
-        sf::sleep(sf::milliseconds(5));
         std::swap(data[i], data[min]);
     }
     draw.draw_sorted(data);
@@ -113,4 +112,49 @@ void Merge::merge(std::vector<float>& data, int left, int mid, int right, Draw& 
         sf::sleep(sf::milliseconds(15));
         data[k++] = v_right[j++];
     }
+}
+
+
+void Quick::sort(std::vector<float>& data, Draw& draw){
+    
+    quick_sort(data, 0, data.size() - 1, draw);
+    draw.draw_sorted(data);
+    sf::sleep(sf::seconds(1));
+}
+
+void Quick::quick_sort(std::vector<float>& data, int left, int right, Draw& draw){
+
+    if(left >= right)
+        return;
+    int part = partition(data, left, right, draw);
+    
+    draw.draw_sort(data, left, part, right);
+    sf::sleep(sf::milliseconds(15));
+    quick_sort(data, left, part - 1, draw);
+    
+    draw.draw_sort(data, left, part, right);
+    sf::sleep(sf::milliseconds(15));
+    quick_sort(data, part + 1, right, draw);
+}
+
+int Quick::partition(std::vector<float>& data, int left, int right, Draw& draw){
+
+    int p_ind = left + std::rand() % (right - left);
+    int pivot = data[p_ind];
+    std::swap(data[p_ind], data[right]);
+
+    int i = left - 1;
+    for(int j = left; j < right; j++){
+        if(i >= 0){
+            draw.draw_sort(data, i, j, right);
+            sf::sleep(sf::milliseconds(15));
+        }
+        
+        if(data[j] < pivot){
+            std::swap(data[j], data[++i]);
+        }
+    }
+
+    std::swap(data[i + 1], data[right]);
+    return i + 1;
 }

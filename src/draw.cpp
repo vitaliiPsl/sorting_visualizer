@@ -12,7 +12,7 @@ std::vector<sf::RectangleShape> Draw::build_bars(std::vector<float>& data){
 
         sf::RectangleShape bar(sf::Vector2f(bar_w, bar_h));
         bar.setFillColor(sf::Color(222, 215, 215));
-        bar.setOutlineThickness(bar_w * 0.05);
+        bar.setOutlineThickness(bar_w * 0.1);
         bar.setOutlineColor(sf::Color::Black);
         bar.setPosition(i * bar_w, m_win.getSize().y - bar_h);
 
@@ -129,15 +129,16 @@ void Draw::draw_menu(){
         exit(1);
     }
 
-    std::vector<sf::Text> text(7);
+    std::vector<sf::Text> text(8);
 
     text[0].setString("Press key:");
     text[1].setString("[B] - Buble sort");
     text[2].setString("[I] - Insertion sort");
     text[3].setString("[M] - Merge sort");
     text[4].setString("[S] - Selection sort");
-    text[5].setString("[Space] - Shuffle");
-    text[6].setString("[Esc] - Exit");
+    text[5].setString("[Q] - Quick sort");
+    text[6].setString("[Space] - Shuffle");
+    text[7].setString("[Esc] - Exit");
 
     for(int i = 0; i < text.size(); i++){
         text[i].setFont(f_roboto);

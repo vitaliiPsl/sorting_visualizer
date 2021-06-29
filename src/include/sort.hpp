@@ -32,4 +32,13 @@ private:
     void merge(std::vector<float>& data, int left, int mid, int right, Draw& draw);
 };
 
+class Quick final : public Sort{
+public:
+    void sort(std::vector<float>& data, Draw& draw) override;
+private:
+    void quick_sort(std::vector<float>& data, int left, int right, Draw& draw);
+    int partition(std::vector<float>& data, int left, int right, Draw& draw);
+};
+
+
 #endif // SORT_H

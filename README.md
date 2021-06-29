@@ -7,6 +7,6 @@ Available algorithms:
 - [x] Buble sort
 - [x] Merge sort
 - [x] Selection sort
-- [ ] Quick sort 
+- [x] Quick sort 
 
 P.S: In order to build this visualizer you have to download SFML library - [SFML](https://www.sfml-dev.org/index.php)
